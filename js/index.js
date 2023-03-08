@@ -10,6 +10,7 @@ const newRole = require('./newrole');
 const newDepartment = require('./newdepartment');
 const newEmployee = require('./newemployee');
 const { allowedNodeEnvironmentFlags } = require('process');
+const { type } = require('os');
 
 //connecting to my sql db
 const db = mysql.createConnection (
@@ -88,5 +89,29 @@ const addDepartment = () => {
                 return questions();
             }
         }
+    )
+
+
+    })};
+
+
+    const addRoles = () => {
+        return inquirer.prompt
+        ([
+            {
+            type: 'input',
+            name: 'roleName',
+            message: 'What is the name of the new role?',
+        },
+            {
+            type: 'input',
+            name: 'rolePay',
+            message: 'What is the salary for this role?'
+            }
+    ])
+    .then(function(roleInput){
+        let title = roleInput.roleTitle
+        let pay = roleInput.rolePay
+        
     })
-}
+    }
