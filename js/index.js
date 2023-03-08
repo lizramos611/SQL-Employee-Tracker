@@ -24,11 +24,11 @@ const db = mysql.createConnection (
 );
 
 
-
+//prompts for users
 const questions = () => {
     return inquirer.prompt 
     ([
-        {
+        {//prompt options 
 type: 'list',
 name: 'first',
 message: 'What would you like to do first?',
@@ -70,7 +70,7 @@ choices: [
 
 };
 
-const addDepartment = () => {
+const addDepartment = () => { //prompts for department questions
     return inquirer.prompt([{
         type: 'input',
         name: 'departmentName',
@@ -95,7 +95,7 @@ const addDepartment = () => {
     })};
 
 
-    const addRoles = () => {
+    const addRoles = () => { //prompts for adding roles
         return inquirer.prompt
         ([
             {
@@ -112,6 +112,36 @@ const addDepartment = () => {
     .then(function(roleInput){
         let title = roleInput.roleTitle
         let pay = roleInput.rolePay
+    db.query('SELECT id AS name FROM department')
+
+    return inquirer.prompt({
+        type: "list",
+        name: "roleDepartment",
+        message: "Which department does this role belong in?"
         
     })
+    .then(function(roleDepartment))
     }
+    }
+
+
+    const addEmployee = () => { //prompts for adding employees
+        return inquirer.prompt([
+            {
+                type: 'input',
+                name: 'firstName',
+                message: 'What is the Employees first name?'
+            },
+            {
+                type: 'input',
+                name: 'lastName',
+                message: 'What is the Employees last name?'
+            }
+        ]).then(function(employeeName){
+            let firstName = employeeName.first_name
+            let lastName = employeeName.last_name
+        })
+    }
+
+    questions();
+    module.exports = db
